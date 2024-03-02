@@ -1,8 +1,16 @@
 import React from 'react'
+import { useContext } from 'react'
+import { GlobalContext } from '../context/Global'
+import { View } from 'react-native'
+import Cards from '../components/Cards'
 
 const Favorites = () => {
+  const { favorites } = useContext(GlobalContext)
+
   return (
-    <Text>Favorites</Text>
+    <View>
+      <Cards breweries={favorites} />
+    </View>
   )
 }
 

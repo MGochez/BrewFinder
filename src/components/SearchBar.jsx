@@ -6,9 +6,9 @@ import { debounce } from 'lodash';
 const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearch = debounce((value) => {
+  const handleSearch = (value) => {
     onSearch(value); 
-  }, 1000);
+  }
 
   return (
     <View style={styles.container}>
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
   },
 });
 

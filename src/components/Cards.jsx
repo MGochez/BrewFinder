@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, View } from 'react-native'
+import { FlatList, View, Text } from 'react-native'
 import BreweryCard from './Card'
 
 const Cards = ({ breweries }) => {

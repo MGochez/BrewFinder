@@ -6,7 +6,10 @@ const DetailScreen = ({ route }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>{brewery.name}</Text>
+      <View>
+        <Text style={styles.title}>{brewery.name}</Text>
+        
+      </View>
       <Text style={styles.info}>Type: {brewery.brewery_type}</Text>
       <Text style={styles.info}>Address: {brewery.address_1}</Text>
       <Text style={styles.info}>City: {brewery.city}</Text>
@@ -25,13 +28,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 25,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 25,
   },
   info: {
-    fontSize: 16,
-    marginBottom: 5,
+    fontSize: 17,
+    marginBottom: 9,
   },
 });
 
