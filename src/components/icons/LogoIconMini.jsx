@@ -1,21 +1,17 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Image } from 'react-native'
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Image } from "react-native";
+import BrewLogo from "../../assets/images/BrewLogo.png";
 
 const LogoIconMini = () => {
-  return (
-    <View>
-        <Image style={styles.iconMini}/>
-    </View>
-  )
-}
+  return <Image style={styles.iconMini} source={BrewLogo} />;
+};
 
- const styles = StyleSheet.create({
-    iconMini: {
-        height: '20px',
-        width: '20px'
-    }
- })
+const styles = StyleSheet.create({
+  iconMini: {
+    height: "20px",
+    width: "20px",
+  },
+});
 
-
-export default LogoIconMini
+export default LogoIconMini;

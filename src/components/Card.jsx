@@ -32,7 +32,7 @@ const BreweryCard = ({ brewery }) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '',
+    backgroundColor: 'white',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,

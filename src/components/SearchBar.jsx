@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Input } from '@rneui/themed';
-import { debounce } from 'lodash';
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet } from "react-native";
+import { Input } from "@rneui/themed";
+import useDebouncedValue from "../hooks/useDebounce";
 
 const SearchBar = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [text, setText] = useState("");
+  const debouncedText = useDebouncedValue(text, 100);
 
-  const handleSearch = (value) => {
-    onSearch(value); 
-  }
+  useEffect(() => {
+    onSearch(text);
+  }, [debouncedText]);
 
   return (
     <View style={styles.container}>
       <Input
-        RightIcon={{ type: 'feather', name: 'search', color: '#0d0d0d' }}
-        placeholder='Brewery, city, state, country'
-        value={searchTerm}
-        onChangeText={(value) => {
-          setSearchTerm(value);
-          handleSearch(value);
-        }}
+        RightIcon={{ type: "feather", name: "search", color: "#0d0d0d" }}
+        placeholder="Brewery, city, state, country"
+        value={text}
+        onChangeText={setText}
       />
     </View>
   );
@@ -27,10 +25,10 @@ const SearchBar = ({ onSearch }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
