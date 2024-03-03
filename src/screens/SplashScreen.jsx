@@ -1,12 +1,12 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import LogoIcon from "../components/icons/LogoIcon";
 
 const SplashScreen = () => {
-  return(
+  return (
     <View>
-      <LogoIcon/>
+      <LogoIcon />
     </View>
-  ) 
-}
+  );
+};
 
 export default SplashScreen;

@@ -1,21 +1,19 @@
-import React from 'react'
-import { FlatList, View, Text } from 'react-native'
-import BreweryCard from './Card'
+import React from "react";
+import { FlatList, View } from "react-native";
+import BreweryCard from "./Card";
 
 const Cards = ({ breweries }) => {
-
-  const renderItem = ({ item }) => <BreweryCard brewery={item}/>
+  const renderItem = ({ item }) => <BreweryCard brewery={item} />;
 
   return (
     <View>
-        <FlatList
+      <FlatList
         data={breweries}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        />
+      />
     </View>
-  )
-}
+  );
+};
 
-
-export default Cards
+export default Cards;

@@ -17,19 +17,18 @@ const StackNavigator = () => {
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate("HomeScreen");
-      //navigation.dispatch(NavigationActions.)
     }, 2000);
   }, []);
 
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="SplashScreen"
+        name='SplashScreen'
         component={SplashScreen}
         options={{ headerShown: false, headerBackVisible: false }}
       />
       <Stack.Screen
-        name="HomeScreen"
+        name='HomeScreen'
         component={HomeScreen}
         options={{
           headerBackVisible: false,
@@ -58,12 +57,12 @@ const StackNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="DetailScreen"
+        name='DetailScreen'
         component={DetailScreen}
         options={{ headerTitle: "Details" }}
       />
       <Stack.Screen
-        name="Favorites"
+        name='Favorites'
         component={Favorites}
         options={{ headerTitle: "My Favorites" }}
       />

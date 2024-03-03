@@ -6,13 +6,24 @@ import {
   View,
   Image,
   Linking,
-  Platform,
 } from "react-native";
-import { Button, color } from "@rneui/base";
+import { Button } from "@rneui/base";
 import { GlobalContext } from "../context/Global";
-import { HeartIcon, MapPin, Globe } from "lucide-react-native";
+import {
+  HeartIcon,
+  Earth,
+  Phone,
+  Globe,
+  MapPin,
+  Building2,
+  Mail,
+  Hop,
+} from "lucide-react-native";
 import MapView, { Marker } from "react-native-maps";
 import NoLocationAvailable from "../assets/images/NoLocationAvailable.png";
+import RedirectionLink from "../components/RedirectionLink";
+import GPSLink from "../components/GPSLink";
+import InfoDetail from "../components/InfoDetails";
 
 const DetailScreen = ({ route }) => {
   const { brewery } = route.params;
@@ -22,40 +33,12 @@ const DetailScreen = ({ route }) => {
     isFavorite(brewery) ? removeFavorite(brewery) : addFavorite(brewery);
   };
 
-  const PhoneNumberLink = ({ phone }) => {
-    const handlePress = () => {
-      Linking.openURL(`tel:${phone}`);
-    };
-    return (
-      <Text style={styles.info} onPress={handlePress}>
-        Phone: <Text style={{ color: "#3153eb" }}>{phone}</Text>
-      </Text>
-    );
+  const handlePhonePress = () => {
+    Linking.openURL(`tel:${brewery.phone}`);
   };
 
-  const WebsiteLink = ({ url }) => {
-    const handlePress = () => {
-      Linking.openURL(url);
-    };
-    return (
-      <Text style={styles.info} onPress={handlePress}>
-        Website: <Text style={{ color: "#3153eb" }}>{url}</Text>
-      </Text>
-    );
-  };
-
-  const GPSLink = ({ latitude, longitude }) => {
-    const lat = parseFloat(latitude);
-    const long = parseFloat(longitude);
-    const handlePress = () => {
-      Linking.openURL(`https://maps.google.com/maps?q=${lat},${long}`);
-    };
-    return (
-      <Button onPress={handlePress}>
-        <MapPin color={"#F4F4F4"} />
-        <Text style={styles.buttonStyle}> Take me there!</Text>
-      </Button>
-    );
+  const handleUrlPress = () => {
+    Linking.openURL(brewery.website_url);
   };
 
   return (
@@ -72,7 +55,7 @@ const DetailScreen = ({ route }) => {
             }}
           >
             <Marker
-              title="Location"
+              title='Location'
               coordinate={{
                 latitude: parseFloat(brewery.latitude),
                 longitude: parseFloat(brewery.longitude),
@@ -87,8 +70,7 @@ const DetailScreen = ({ route }) => {
           style={{ width: "100%", height: "55%" }}
         />
       )}
-
-      <View style={styles.titleAndButton}>
+      <View style={styles.buttonAndTitle}>
         <Text style={styles.title}>{brewery.name}</Text>
         <Button radius={"md"} color={"#e45290"} onPress={handleFavorite}>
           {isFavorite(brewery) ? (
@@ -100,17 +82,35 @@ const DetailScreen = ({ route }) => {
       </View>
       <View style={styles.line} />
       <View style={{ margin: 10 }}>
-        <Text style={styles.info}>Type: {brewery.brewery_type}</Text>
-        <Text style={styles.info}>Address: {brewery.address_1}</Text>
-        <Text style={styles.info}>City: {brewery.city}</Text>
-        <Text style={styles.info}>State: {brewery.state_province}</Text>
-        <Text style={styles.info}>Postal Code: {brewery.postal_code}</Text>
-        <Text style={styles.info}>Country: {brewery.country}</Text>
-        <PhoneNumberLink phone={brewery.phone} />
-        <View style={styles.iconText}>
-          <Globe size={10} color={"#D0D0D0"} />
-          <WebsiteLink url={brewery.website_url} />
-        </View>
+        <InfoDetail label={"Type"} content={brewery.brewery_type} Icon={Hop} />
+        <InfoDetail
+          label={"Adress"}
+          content={brewery.address_1}
+          Icon={MapPin}
+        />
+        <InfoDetail
+          label={"City"}
+          content={`${brewery.city}, ${brewery.state}`}
+          Icon={Building2}
+        />
+        <InfoDetail label={"Country"} content={brewery.country} Icon={Earth} />
+        <InfoDetail
+          label={"Postal Code"}
+          content={brewery.postal_code}
+          Icon={Mail}
+        />
+        <RedirectionLink
+          label={"Phone"}
+          content={brewery.phone}
+          Icon={Phone}
+          onPress={handlePhonePress}
+        />
+        <RedirectionLink
+          label={"Website"}
+          content={brewery.website_url}
+          Icon={Globe}
+          onPress={handleUrlPress}
+        />
       </View>
     </ScrollView>
   );
@@ -127,8 +127,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   info: {
-    fontSize: 15,
-    padding: 4,
+    fontSize: 18,
+    padding: 3,
   },
   buttonStyle: {
     color: "#F4F4F4",
@@ -136,12 +136,12 @@ const styles = StyleSheet.create({
     padding: 5,
     height: 30,
   },
-  titleAndButton: {
+  buttonAndTitle: {
     display: "flex",
     flexDirection: "row",
-    flex: 1,
     justifyContent: "space-between",
     padding: 5,
+    alignItems: "center",
   },
   map: {
     width: "100%",
@@ -153,8 +153,8 @@ const styles = StyleSheet.create({
   },
   iconText: {
     display: "flex",
-    flex: 1,
-    flexDirection: "row",
+    flexDirection: "column",
+    justifyContent: "center",
   },
 });
 

@@ -8,14 +8,14 @@ const SearchBar = ({ onSearch }) => {
   const debouncedText = useDebouncedValue(text, 100);
 
   useEffect(() => {
-    onSearch(text);
+    onSearch(text.trim());
   }, [debouncedText]);
 
   return (
     <View style={styles.container}>
       <Input
         RightIcon={{ type: "feather", name: "search", color: "#0d0d0d" }}
-        placeholder="Brewery, city, state, country"
+        placeholder='Brewery, city, state, country'
         value={text}
         onChangeText={setText}
       />
